@@ -1,0 +1,2 @@
+Install Mosqitto, add to Path, mind the two executabe:mosquitto_pub, mosqitto_sub
+What host and topic do you want to use: cange 127.0.0.1 (localhost by the "test.mosquitto.org" to use the public Broker
