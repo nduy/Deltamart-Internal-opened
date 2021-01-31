@@ -1,0 +1,25 @@
+** Start service
+mosq -v
+
+** See host
+netstat -a
+: 1884 port
+
+*** Localhost
+**Subscribe
+
+PS C:\mos16> mosquitto_sub -h 127.0.0.1 -t duy2
+mosquitto_sub -h test.mosquitto.org -t panda/test
+
+**Publish
+PS C:\mos16> mosquitto_pub -h 127.0.0.1 -m "Hello New" -t duy2
+
+*** On public Broker
+ ** Subscribe:
+mosquitto_sub -h test.mosquitto.org -t panda/test0 
+
+*** mqtt.eclipse.org 
+
+ ** Publish:
+PS C:\mos16> mosquitto_pub -h test.mosquitto.org -m "Hello World 3" -t panda/test0
+mosquitto_sub -h test.mosquitto.org -t panda/test0
