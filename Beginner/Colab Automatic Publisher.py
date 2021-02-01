@@ -6,13 +6,17 @@
 import paho.mqtt.client as mqtt;
 from datetime import datetime;
 import random
+import string
+
 from time import sleep
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print("Hi, {0}".format(name))  # Press Ctrl+F8 to toggle the breakpoint.
-
+def id_generator(size=50, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+...
+get_random_string(8)
+get_random_string(8)
+get_random_string(6)
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
@@ -43,10 +47,13 @@ if __name__ == '__main__':
     now = datetime.now()
 
 
-    for i in range(0,50):
+    for i in range(0,150):
         print(i);
+        tmp=id_generator(900, "6793YUIO");
+        print(tmp);
+        print(tmp);
         dt_string = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3];
-        client.publish(topic="panda/test0", payload="["+str(i)+"]"+"\n"+dt_string);
+        client.publish(topic="panda/test0", payload="Package"+"["+str(i)+"]"+"\n"+dt_string+ " ,| load:"+ tmp);
         #sleep(random.uniform(0,0.5));
 
     #subclient.subscribe()
