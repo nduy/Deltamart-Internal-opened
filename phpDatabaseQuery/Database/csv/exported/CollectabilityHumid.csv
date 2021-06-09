@@ -1,0 +1,4 @@
+CollectabilityID,ProviderID,TimeFrom,TimeTo,Town,Location,Sensortype,IoTDevice,Restrictions,Comment,TopicName,Provider IP,ZTNetworkID
+yfij65,DDN,2022-04-27 13:22,2022-05-15 09:04,Galway,Kitchen,HumiditySensor,Raspberry Pi4,None,None,frightfully0curvy00carriage1,192.168.0.116,vm2355980
+yfij66,DDN,2021-03-21 01:38,2021-11-22 01:53,Galway,Bedroom,HumiditySensor,Raspberry Pi3,None,None,immediately0grieving01book1,192.168.0.108,vm2355980
+yfij67,HAB,2021-06-02 21:11,2021-06-30 15:08,Leixlip,Diningroom,HumiditySensor,Raspberry Pi4,None,None,jovially1coordinated00distance0,201.215.235.109,3v7p8lvfbcpu48r8
