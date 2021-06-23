@@ -38,7 +38,7 @@ if ($_GET['Location']!="")
  $location =  $_GET['Location'];
  if ($_GET['Sensortype']!="")
  $sensortype=  $_GET['Sensortype'];
- if ($$_GET['ProviderID']!="")
+ if ($_GET['ProviderID']!="")
  $providerid=$_GET['ProviderID'];
 
 echo("Hello town of  ".$town. "Location:".$location);
