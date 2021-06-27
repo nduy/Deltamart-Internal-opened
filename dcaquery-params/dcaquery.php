@@ -1,4 +1,5 @@
 <?php
+
 function conditionStr($arr) {
 $res="";
 $count=0;
@@ -6,13 +7,17 @@ $count=0;
 //  echo("<br>COUNT=".$count);
 //  echo("Values:".$key."=>".$value);
   if ($count!=0){
-
+  if (in_array($key,["dcaID","data_type","ProviderID","BuyerID","PublisherReady","SubscriberReady","MQTTopic","UserID","Fullname","IPAddress","Email","Online","ZTNetworkID"])) {
   $res=$res." AND ".$key.'="'.$value.'"';
+  }
   $count=$count+1;
+  
 //  echo("<++>RES=|".$res."|");
   } else {
     # code...
+     if (in_array($key,["dcaID","data_type","ProviderID","BuyerID","PublisherReady","SubscriberReady","MQTTopic","UserID","Fullname","IPAddress","Email","Online","ZTNetworkID"])) {
      $res=$res.$key.'="'.$value.'"';
+     }
      $count=$count+1;
   //   echo("<++>RES=|".$res."|");
   }
