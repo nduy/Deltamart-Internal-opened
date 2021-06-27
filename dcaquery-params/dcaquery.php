@@ -2,6 +2,7 @@
 
 function conditionStr($arr) {
 $res="";
+$error_flag= false;
 $count=0;
  foreach ($arr as $key => $value) {
 //  echo("<br>COUNT=".$count);
@@ -9,6 +10,8 @@ $count=0;
   if ($count!=0){
   if (in_array($key,["dcaID","data_type","ProviderID","BuyerID","PublisherReady","SubscriberReady","MQTTopic","UserID","Fullname","IPAddress","Email","Online","ZTNetworkID"])) {
   $res=$res." AND ".$key.'="'.$value.'"';
+  } else{
+    
   }
   $count=$count+1;
   
@@ -17,6 +20,8 @@ $count=0;
     # code...
      if (in_array($key,["dcaID","data_type","ProviderID","BuyerID","PublisherReady","SubscriberReady","MQTTopic","UserID","Fullname","IPAddress","Email","Online","ZTNetworkID"])) {
      $res=$res.$key.'="'.$value.'"';
+     } else {
+     
      }
      $count=$count+1;
   //   echo("<++>RES=|".$res."|");
@@ -52,10 +57,16 @@ foreach ($_GET as $key => $value) {
 //$sql = "SELECT dcaID,	data_type, ProviderID, BuyerID,	PublisherReady,SubscriberReady,MQTTopic FROM	dcastatus JOIN Users. ON dcastatus.ProviderID=Users.UserID  WHERE".' dcaID= "'.$dcaID.'"';
 $sql = "SELECT * FROM	dcastatus JOIN Users ON dcastatus.ProviderID=Users.UserID WHERE ".conditionStr($_GET);
 // echo("<br>QUERY: ".$sql);
-$result = $conn->query($sql);
-//echo("<br> DB QUERY:<br>".$sql."<br> <hr>");
 
+$result = $conn->query($sql);
+//echo(gettype($result));
+//echo("<br> DB QUERY:<br>".$sql."<br> <hr>");
+if(gettype($result)!="boolean")
+{
+  if ($result->num_rows > 0){
   echo(json_encode($result->fetch_assoc()));
+}
+
 if ($result->num_rows > 0) {
   // output data of each row
   $count=0;
@@ -81,6 +92,7 @@ if ($result->num_rows > 0) {
   }
 } else {
   echo "0 results";
+}
 }
 $conn->close();
 
