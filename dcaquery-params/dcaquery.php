@@ -63,9 +63,8 @@ $result = $conn->query($sql);
 //echo("<br> DB QUERY:<br>".$sql."<br> <hr>");
 if(gettype($result)!="boolean")
 {
-  if ($result->num_rows > 0){
-  echo(json_encode($result->fetch_assoc()));
-}
+  echo('{ "Response":"succeed","Count":'.$result->num_rows. ', "Results":[');
+  
 
 if ($result->num_rows > 0) {
   // output data of each row
@@ -74,7 +73,13 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $count=$count+1;
   //  echo "<===".$count."===><br>";
-  //    echo json_encode($row);
+    if ($count==1){//First item
+      echo "".json_encode($row);
+    }
+    else{
+      echo ",".json_encode($row);
+    }
+      
   /*
         echo "-->dcaID: " . $row["dcaID"]
         ."-| data_type: '" . $row["data_type"]
@@ -89,13 +94,14 @@ if ($result->num_rows > 0) {
   //        . "<span style=\"color:#006600\" onclick=\"alert('[  ProviderIP Address]:". $row["ProviderIP"]."\\n[ZeroTier Network ID]:".$row["ZTNetworkID"].  "      \\n[MQTT Topic name  ]:   ".$row["TopicName"]."');\"><img alt=\"\" src=\"https://icons.iconarchive.com/icons/paomedia/small-n-flat/24/sign-info-icon.png\" style=\"height:24px; width:24px\" /></span>"
 
           .  "<br>"; */
+          
   }
 } else {
   echo "0 results";
 }
 }
 $conn->close();
-
+echo("]}");
 
 
 ?>
