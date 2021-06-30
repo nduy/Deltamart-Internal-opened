@@ -1,0 +1,4 @@
+INSERT INTO `dcastatus`(`dcaID`, `data_type`, `ProviderID`, `BuyerID`, `PublisherReady`, `SubscriberReady`, `MQTTopic`) VALUES ('6ldgogctqe','HumiditySensor','UFF','DDN',1,0,'RocketDCloud');
+INSERT INTO `dcastatus`(`dcaID`, `data_type`, `ProviderID`, `BuyerID`, `PublisherReady`, `SubscriberReady`, `MQTTopic`) VALUES ('stw73jv3nt','HumiditySensor','KTC','DDN',1,0,'LightDSalmon');
+INSERT INTO `dcastatus`(`dcaID`, `data_type`, `ProviderID`, `BuyerID`, `PublisherReady`, `SubscriberReady`, `MQTTopic`) VALUES ('wk2u8ip5vq','PressureSensor','MCY','DDN',1,0,'LightDSalmon');
+INSERT INTO `dcastatus`(`dcaID`, `data_type`, `ProviderID`, `BuyerID`, `PublisherReady`, `SubscriberReady`, `MQTTopic`) VALUES ('kigvl4ohme','TemperatureSensor','PZA','DDN',1,0,'MoonDWindy')
