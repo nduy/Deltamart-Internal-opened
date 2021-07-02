@@ -1,4 +1,4 @@
-Midnight build version, NOT yet tested with real Pis
+MIDNIGHT BUILT version, NOT yet tested with real Pis
 Executable script is "publish.py"<br/>
 ======= ==API==IMPORTANT: <br/>
 Before running script, you must deploy an API in a server with PHP enabled.\
