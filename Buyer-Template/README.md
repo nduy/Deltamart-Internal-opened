@@ -3,7 +3,7 @@ Executable script is "publish.py"<br/>
 Before running script, you must deploy an API in a server with PHP enabled.\
 See here the following how to install it in Unix-like System:\
 https://websiteforstudents.com/apache2-with-php-7-1-support-on-ubuntu-18-04-lts-beta-server/ \
-Source code for API is in APIBuyerDCAStatusQuery. Primaryly call "dcaquery.php".\
+Source code for API is in APIBuyerDCAStatusQuery. primarily call "dcaquery.php".\
 =========DATABASE<br/>
 Database file is in <br/>
 Deltamart-Internal/Buyer-Template/Database/SQL/__
