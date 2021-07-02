@@ -1,0 +1,8 @@
+Working Link:
+http://localhost:81/i/query.php?town=Galway&location=Bedroom
+http://localhost:81/i/query.php?Town=Galway&Location=Bedroom&Sensortype=HumiditySensor&ProviderID=DDN
+
+
+
+-
+http://localhost/i/dcaquery.php?dcaID=1a8450621b

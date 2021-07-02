@@ -28,7 +28,7 @@ def print_logo():
     # Use a breakpoint in the code line below to debug your script.
     with open('delta-logo-ascii-art.txt', 'r') as f:
         for line in f:
-           print(colored(line.rstrip(),'green'))
+           print(colored(line.rstrip(),'blue'))
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_logo();
@@ -83,10 +83,14 @@ listenTime = float(input("Enter the period of time you want to listen to Provide
 # Validate User name until it is good enough
 while (listenTime<=0 or listenTime>=60):
     BuyerID = input("Incorrect Buyer ID, Reenter listening time range[0.0,59.99]:");
+print(colored("The stream will be saved by the end of the selected time period in \"Output\" Folder  ","magenta"))
+fileName = input("Enter  filename to save (Under \"Output\" folder:");
+
 # Now do subscribe LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 print(results[Sellecteddca_index])
 Pro_IP= results[Sellecteddca_index]['Provider.IPAddress']
 Pro_topic= results[Sellecteddca_index]['MQTTopic']
+Pro_id= results[Sellecteddca_index]['Provider.UserID']
 
 samples,start_time,end_time = lib.subscribenExport(Pro_IP,Pro_topic,listen_time=listenTime)
 
@@ -96,7 +100,21 @@ print("==Tototal samples received: {0}".format(len(samples)))
 json_string = json.dumps(samples)
 print("=======================LISTENNED  TO PROVIDER. FROM Local_Time"+(time.strftime('%Y-%m-%d %H:%M:%S.', time.localtime(start_time)))+" TO Local_Time"+time.strftime('%Y-%m-%d %H:%M:%S.', time.localtime(end_time)))
 #print(json_string)
-f = open("Outputfile.json", "w")
-f.write("{\"data\":"+json_string+"}")
+#print(colored("The stream will be saved by the end of the selected time period in \"Output\" Folder  ","magenta"))
+#fileName= input("Enter  filename to save (Under \"Output\" folder:");
+
+fullFileName = "Output\\"+fileName+".json"
+
+print("Writing stream to "+fullFileName)
+
+f = open(fullFileName, "w+")
+f.write("{")
+f.write("\"From_User\":\""+Pro_id+'\"')
+f.write('{\"local_StartTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))+'\",'
+        +'\"local_EndTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))+'\",'
+         +" \"data\":"+json_string+"}");
 f.close()
+# print(colored("Program completed.\nYou can now safely turn the program off and see output at {0}".format(fullFileName)),"red")
+print(colored("Program completed.\nYou can now safely turn the program off and see output at: ","green"))
+print(colored(fullFileName,"red"))
 

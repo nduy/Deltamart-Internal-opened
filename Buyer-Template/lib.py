@@ -16,9 +16,14 @@ def on_connect(client, userdata, flags, rc,qos=0):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+#    print(msg.topic+" "+str(msg.payload))
     rs.append(str(msg.payload))
-    print("^^^len="+str(len(rs)))
+    n_sample=len(rs)
+    print("^^^Received {0} samples".format(str(n_sample)))
+    if (n_sample % 100 ==0):
+        print("^^^Received {0} samples".format(str(n_sample)))
+        print("latest sample: {0}".format(msg.payload))
+
 #    print(rs)
 
 def subscribenExport(dst_host="test.mosquitto.org",dst_topic="#",listen_time=3):
@@ -72,6 +77,7 @@ if __name__ == '__main__':
     json_string = json.dumps(samples)
     print("=======================JSON STR"+(time.strftime('%Y-%m-%d %H:%M:%S.', time.localtime(start_time)))+"->"+time.strftime('%Y-%m-%d %H:%M:%S.', time.localtime(end_time)))
     #print(json_string)
+
     f = open("Outputfile.json", "w")
-    f.write("{\"data\":"+json_string+"}")
+    f.write("{\"data\"\\:"+json_string+"}")
     f.close()
