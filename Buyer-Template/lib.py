@@ -19,7 +19,7 @@ def on_message(client, userdata, msg):
 #    print(msg.topic+" "+str(msg.payload))
     rs.append(str(msg.payload))
     n_sample=len(rs)
-    print("^^^Received {0} samples".format(str(n_sample)))
+#    print("^^^Received {0} samples".format(str(n_sample)))
     if (n_sample % 100 ==0):
         print("^^^Received {0} samples".format(str(n_sample)))
         print("latest sample: {0}".format(msg.payload))
