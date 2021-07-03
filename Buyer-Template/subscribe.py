@@ -109,10 +109,10 @@ print("Writing stream to "+fullFileName)
 
 f = open(fullFileName, "w+")
 f.write("{")
-f.write("\"From_User\":\""+Pro_id+'\"')
-f.write('{\"local_StartTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))+'\",'
-        +'\"local_EndTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))+'\",'
-         +" \"data\":"+json_string+"}");
+f.write('\"From_User\":\"'+Pro_id+'\"')
+f.write(',\"Local_StartTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))+'\",'
+        +'\"Local_EndTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))+'\",'
+         +" \"Data_Samples\":"+json_string+"}");
 f.close()
 # print(colored("Program completed.\nYou can now safely turn the program off and see output at {0}".format(fullFileName)),"red")
 print(colored("Program completed.\nYou can now safely turn the program off and see output at: ","green"))
