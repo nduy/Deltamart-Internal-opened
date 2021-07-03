@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Deltamart2021";
 $dbname = "miniproto";
 ?>
