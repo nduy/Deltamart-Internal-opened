@@ -117,5 +117,5 @@ f.write(',\"Local_StartTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.local
 f.close()
 # print(colored("Program completed.\nYou can now safely turn the program off and see output at {0}".format(fullFileName)),"red")
 print(colored("Program completed.\nYou can now safely turn the program off and see output at: ","green"))
-print(colored(os.getcwd() +"\"+ fullFileName,"red"))
+print(colored(os.getcwd() +'\"'+ fullFileName,"red"))
 
