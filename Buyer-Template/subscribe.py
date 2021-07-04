@@ -49,7 +49,7 @@ if __name__ == '__main__':
 # print("UserID:{0}ta Collection ID{1}" ".format(BuyerID));
     print("Now looking for establised Data Collection Activity for user {}".format(BuyerID));
 
-x = requests.get('http://localhost/i/dcaquery.php?BuyerID='+BuyerID);
+x = requests.get('http://dmart.hopto.org/dcaquery.php?BuyerID='+BuyerID);
 print("Now parse the results");
 print(x.text)
 dcaresult = ast.literal_eval(x.text);
