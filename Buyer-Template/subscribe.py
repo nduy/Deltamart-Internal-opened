@@ -10,6 +10,7 @@ This is the code for Buyer client to
 
 import re
 import os
+import sys
 import ast
 import requests
 from termcolor import colored
@@ -104,8 +105,10 @@ print("=======================LISTENNED  TO PROVIDER. FROM Local_Time"+(time.str
 #print(colored("The stream will be saved by the end of the selected time period in \"Output\" Folder  ","magenta"))
 #fileName= input("Enter  filename to save (Under \"Output\" folder:");
 
-fullFileName = "Output\\"+fileName+".json"
-
+if sys.platform == 'win32':
+    fullFileName = "Output\\"+fileName+".json"
+else: # Linux and everything else
+    fullFileName = "Output/"+fileName+".json"
 print("Writing stream to "+fullFileName)
 
 f = open(fullFileName, "w+")
@@ -117,5 +120,9 @@ f.write(',\"Local_StartTime\":\"'+ time.strftime('%Y-%m-%d %H:%M:%S', time.local
 f.close()
 # print(colored("Program completed.\nYou can now safely turn the program off and see output at {0}".format(fullFileName)),"red")
 print(colored("Program completed.\nYou can now safely turn the program off and see output at: ","green"))
-print(colored(os.getcwd() +'\\'+ fullFileName,"red"))
+
+if sys.platform == 'win32':
+    print(colored(os.getcwd() +'\\'+ fullFileName,"red"))
+else: # Linux and everything else
+    print(colored(os.getcwd() +'/'+ fullFileName,"red"))
 
