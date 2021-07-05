@@ -23,7 +23,7 @@ from lib import *
 BuyerID="DDN";  # A dummy user ID of the Buyer
 providID_pattern = re.compile('[A-Z0-9]{3}')
 
-dcaID="";  # A dummy Data Collection Activity
+dcaID="";  # A dummy Data Collection Activity ID
 dcaID_pattern = re.compile('[a-z0-9]{10}')
 
 def print_logo():
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     '''
     # Print out inputed data
     print("===========================")
-    print("==You entered the following ìnormation")
+    print("==You entered the following ìnformation")
 # print("UserID:{0}ta Collection ID{1}" ".format(BuyerID));
     print("Now looking for establised Data Collection Activity for user {}".format(BuyerID));
 
@@ -86,6 +86,20 @@ listenTime = float(input("Enter the period of time you want to listen to Provide
 while (listenTime<=0 or listenTime>=60):
     BuyerID = input("Incorrect Buyer ID, Reenter listening time range[0.0,59.99]:");
 print(colored("The stream will be saved by the end of the selected time period in \"Output\" Folder  ","magenta"))
+
+with open('decoding_table.txt', 'r') as g:
+    for line in g:
+        print(colored(line.rstrip(), 'yellow'))
+
+selected_decoding_method = int(input("Enter index of method for decoding messages: "));
+lib.selected_decoding_method=selected_decoding_method;
+
+if (selected_decoding_method<0 or selected_decoding_method>8):
+    selected_decoding_method= int(input("[!]Incorrect input. Reenter index of the message decoding method"))
+    with open('decoding_table.txt.txt', 'r') as g:
+        for line in g:
+            print(colored(line.rstrip(), 'yellow'))
+
 fileName = input("Enter  filename to save (Under \"Output\" folder:");
 
 # Now do subscribe LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
