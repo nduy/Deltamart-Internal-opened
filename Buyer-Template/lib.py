@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 """
 Supporting functions for  the Subscriber
 """
 import paho.mqtt.client as mqtt
 import time
 import json
-
+import base64
 rs=[]
 dst_topic="#"
+selected_decoding_method=0
 def on_connect(client, userdata, flags, rc,qos=0):
     print("Connected with result code "+str(rc))
 
@@ -16,13 +18,16 @@ def on_connect(client, userdata, flags, rc,qos=0):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-#    print(msg.topic+" "+str(msg.payload))
-    rs.append(str(msg.payload))
+    print(msg.topic+" "+str(msg.payload))
+    # Decode message:
+    decoded_payload = decode_message(msg.payload,selected_decoding_method)
+    print("Decoded--->"+str(decoded_payload));
+    rs.append(str(decoded_payload))
     n_sample=len(rs)
 #    print("^^^Received {0} samples".format(str(n_sample)))
     if (n_sample % 100 ==0):
         print("^^^Received {0} samples".format(str(n_sample)))
-        print("latest sample: {0}".format(msg.payload))
+        print("latest sample: {0}".format(decoded_payload))
 
 #    print(rs)
 
@@ -65,6 +70,49 @@ def subscribenExport(dst_host="test.mosquitto.org",dst_topic="#",listen_time=3):
 #    client.loop_forever(timeout=0.01,max_packets=100)
 #    client.loop(timeout=0.5)
 
+def decode_message(encrypted_message="",decode_method=0):
+    '''
+    :param encrypted_message:(squece of byte-like string: b'something') The message encrypted by some methods
+    :param decode_method: an Integer code of the decoding method:
+
+    byte_string = b"\x61\x62\x63\xc3\xa1"
+    (((0))): Do nothing, just return the original message
+    (((1))): ASCII: e.g result:ERR 'ascii' codec can't decode byte 0xc3 in position 3: ordinal not in range(128)
+    UTF-8: UTF-8 E.g.'abcá'
+      (((2))): utf-8: e.g result:ERR 'ascii' codec can't decode byte 0xc3 in position 3: ordinal not in range(128)
+    UTF-8: UTF-8 E.g. E.g: b"\x61\x62\x63\xc3\xa1" to 'abcá'.
+    (((3))): UTF16. E.g result : UnicodeDecodeError: 'utf-16-le' codec can't decode byte 0xa1 in position 4: truncated data
+             b'\xff\xfea\x00b\x00c\x00' to 'abc'
+    (((4))) UTF32: UTF32. E.g: b'\xff\xfe\x00\x00a\x00\x00\x00b\x00\x00\x00c\x00\x00\x00' to 'abc'
+    (((5))) Base16: Base16.E.g: b'616263' to 'abc'
+    (((6))) Base32: E.g. b"MFRGG===" to 'abc'
+    (((7))) Base64. E.g: b"YWJj" to 'abc'
+    (((8))) Base85. E.g.b"@:E^" to 'abc'
+
+    :return:
+    plain text <class 'str')at arbitrary length.
+    '''
+
+    if (decode_method==0): # Do nothing
+        return encrypted_message;
+    elif decode_method==1: # ASCII
+        return encrypted_message.decode('ascii');
+    elif (decode_method==2): #UTF8
+        return encrypted_message.decode('utf8');
+    elif (decode_method==3): #UTF16
+        return encrypted_message.decode('utf16');
+    elif(decode_method == 4): #UTF32
+        return encrypted_message.decode('utf32');
+    elif(decode_method == 4): # Base16
+        return base64.b16decode(encrypted_message);
+    elif(decode_method == 5): # Base32
+        return base64.b32decode(encrypted_message);
+    elif(decode_method == 6): # Base64
+        return base64.b64decode(encrypted_message);
+    elif(decode_method == 7):
+        return base64.b85decode(encrypted_message);
+    else:
+        return encrypted_message
 if __name__ == '__main__':
     samples,start_time,end_time=subscribenExport("test.mosquitto.org","#",listen_time=0.1)
 
