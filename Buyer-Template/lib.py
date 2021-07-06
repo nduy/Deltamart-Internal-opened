@@ -7,7 +7,7 @@ import time
 import json
 import base64
 rs=[]
-dst_topic="#"
+dst_topic="#";
 selected_decoding_method=0
 def on_connect(client, userdata, flags, rc,qos=0):
     print("Connected with result code "+str(rc))
@@ -17,21 +17,21 @@ def on_connect(client, userdata, flags, rc,qos=0):
     client.subscribe("#", qos=0)
 
 # The callback for when a PUBLISH message is received from the server.
-def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+def on_message(client, userdata, msg ):
+#    print("Decoding method:{0}".format(selected_decoding_method))
+#    print(msg.topic+" "+str(msg.payload))
     # Decode message:
-    decoded_payload = decode_message(msg.payload,selected_decoding_method)
-    print("Decoded--->"+str(decoded_payload));
-    rs.append(str(decoded_payload))
+    msg.payload = decode_message(msg.payload,selected_decoding_method)
+    rs.append(str(msg.payload))
     n_sample=len(rs)
 #    print("^^^Received {0} samples".format(str(n_sample)))
     if (n_sample % 100 ==0):
         print("^^^Received {0} samples".format(str(n_sample)))
-        print("latest sample: {0}".format(decoded_payload))
+        print("latest sample: {0}".format(msg.payload))
 
 #    print(rs)
 
-def subscribenExport(dst_host="test.mosquitto.org",dst_topic="#",listen_time=3):
+def subscribenExport(dst_host="test.mosquitto.org",dst_topic="#",listen_time=3,decoding=0):
     """
     Subscribe to thde dest_host under dest_topic with qos
     Params:
@@ -45,6 +45,7 @@ def subscribenExport(dst_host="test.mosquitto.org",dst_topic="#",listen_time=3):
 
     """
     dst_topic=dst_topic
+    selected_decoding_method=decoding
     print(">>Subscribing to [{0}] under topic of \"{1}\" in {2} minutes".format(dst_host,dst_topic,listen_time));
 # The callback for when the client receives a CONNACK response from the server.
     startTime = time.time()
@@ -92,14 +93,14 @@ def decode_message(encrypted_message="",decode_method=0):
     :return:
     plain text <class 'str')at arbitrary length.
     '''
-
+#    print("Decoding:{0}\nMethod: {1} ".format(encrypted_message,decode_method))
     if (decode_method==0): # Do nothing
         return encrypted_message;
     elif decode_method==1: # ASCII
         return encrypted_message.decode('ascii');
-    elif (decode_method==2): #UTF8
+    elif (decode_method==2): #utF8
         return encrypted_message.decode('utf8');
-    elif (decode_method==3): #UTF16
+    elif (decode_method==3): #utF16
         return encrypted_message.decode('utf16');
     elif(decode_method == 4): #UTF32
         return encrypted_message.decode('utf32');
@@ -129,3 +130,6 @@ if __name__ == '__main__':
     f = open("Outputfile.json", "w")
     f.write("{\"data\"\\:"+json_string+"}")
     f.close()
+
+def setdecodingmethod( code=0):
+    selected_decoding_method=code

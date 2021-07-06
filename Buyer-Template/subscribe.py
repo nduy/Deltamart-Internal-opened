@@ -45,7 +45,7 @@ if __name__ == '__main__':
     '''
     # Print out inputed data
     print("===========================")
-    print("==You entered the following ìnformation")
+    print("==You entered the following information")
 # print("UserID:{0}ta Collection ID{1}" ".format(BuyerID));
     print("Now looking for establised Data Collection Activity for user {}".format(BuyerID));
 
@@ -92,10 +92,15 @@ with open('decoding_table.txt', 'r') as g:
         print(colored(line.rstrip(), 'yellow'))
 
 selected_decoding_method = int(input("Enter index of method for decoding messages: "));
-lib.selected_decoding_method=selected_decoding_method;
+lib.selected_decoding_method=selected_decoding_method
+lib.setdecodingmethod(selected_decoding_method)
+
 
 if (selected_decoding_method<0 or selected_decoding_method>8):
     selected_decoding_method= int(input("[!]Incorrect input. Reenter index of the message decoding method"))
+    selected_decoding_method=selected_decoding_method;
+
+    lib.setdecodingmethod(selected_decoding_method)
     with open('decoding_table.txt.txt', 'r') as g:
         for line in g:
             print(colored(line.rstrip(), 'yellow'))
@@ -108,7 +113,7 @@ Pro_IP= results[Sellecteddca_index]['Provider.IPAddress']
 Pro_topic= results[Sellecteddca_index]['MQTTopic']
 Pro_id= results[Sellecteddca_index]['Provider.UserID']
 
-samples,start_time,end_time = lib.subscribenExport(Pro_IP,Pro_topic,listen_time=listenTime)
+samples,start_time,end_time = lib.subscribenExport(Pro_IP,Pro_topic,listen_time=listenTime,decoding=selected_decoding_method)
 
 ### Write to JSON file
 print("SUMMARY===================================================")
