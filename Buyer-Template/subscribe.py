@@ -35,7 +35,7 @@ def print_logo():
 if __name__ == '__main__':
     print_logo();
     print(colored( "      === DELTAMART DATA STREAM SUBSCRIBER ===",'red'))
-    BuyerID = input("Enter YOUR User ID: ");
+    BuyerID = input("Enter YOUR User ID: ").upper();
     # Validate User name until it is good enough
     '''
     while (providID_pattern.match(BuyerID)== None):
@@ -61,7 +61,7 @@ try:
 
     dcaresult = ast.literal_eval(x.text);
 except:
-    print("[ERR]API response is not understandable.Terminating...")
+    print("[ERR]API response is not understandable.Terminating...\n Check you UserID. ")
 dcaresult = ast.literal_eval(x.text);
 print('There are '+str(dcaresult['Count'])+ " DCA established for you (as a Buyer):");
 results = dcaresult['Results'];
