@@ -62,7 +62,7 @@ try:
     dcaresult = ast.literal_eval(x.text);
 except:
     print("[ERR]API response is not understandable.Terminating...")
-
+dcaresult = ast.literal_eval(x.text);
 print('There are '+str(dcaresult['Count'])+ " DCA established for you (as a Buyer):");
 results = dcaresult['Results'];
 for i in range(0,dcaresult['Count']):
