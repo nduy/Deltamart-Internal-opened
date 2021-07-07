@@ -51,8 +51,18 @@ if __name__ == '__main__':
 
 x = requests.get('http://dmart.hopto.org/dcaquery.php?BuyerID='+BuyerID);
 print("Now parse the results");
-print(x.text)
-dcaresult = ast.literal_eval(x.text);
+
+#print(x.text)
+try:
+    if (int(x['Count'])<=0):
+        print(colored("(!) No DCA corresponding to you found.Double Check inputed UserID or perhap you did not establish any DCA", "red"))
+
+
+
+    dcaresult = ast.literal_eval(x.text);
+except:
+    print("[ERR]API response is not understandable.Terminating...")
+
 print('There are '+str(dcaresult['Count'])+ " DCA established for you (as a Buyer):");
 results = dcaresult['Results'];
 for i in range(0,dcaresult['Count']):
@@ -78,6 +88,10 @@ Sellecteddca_index=0
 Sellecteddca_index = int(input("Enter index of the Data Collection you want to recieve data (number from 0 to {0}:".format(dcaresult['Count']-1)));
 #print(type(Sellecteddca_index))
 #print(type(dcaresult['Count']))
+if (int(dcaresult['Count'])<=0):
+    print(colored("(!) No DCA corresponding to you found.Double Check inputed UserID or perhap you did not establish any DCA", "red"))
+
+
 while (Sellecteddca_index<0 or Sellecteddca_index>int(dcaresult['Count'])-1):
     Sellecteddca_index = input("[!]Incorrect input. Reenter index of the Data Collection you want to recieve data (number from 0 to {0}:".format(dcaresult['Count']-1));
 ############################################
