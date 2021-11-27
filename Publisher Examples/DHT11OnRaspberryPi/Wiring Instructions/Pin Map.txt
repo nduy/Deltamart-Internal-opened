@@ -1,0 +1,8 @@
+Legends:
+- (Pin): Raspberry Pi3 pin
+- [Pin]: DHT11 pin
+
+Wiring details:
+ (2-Power5v) --[Vcc +]
+ (6-Ground) --[Ground -]
+ (GPIO4 GPCLK0) -- [Signal]
