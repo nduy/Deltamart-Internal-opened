@@ -129,9 +129,9 @@ print("Retrived Provider Host:"+Pro_IP)
 print("Now pingging the Provider:")
 response = os.system("ping -c 1 " + Pro_IP)
 if response == 0:
-  print( Pro_IP+ 'is up!')
+  print( Pro_IP+ ' is up!')
 else:
-  print( Pro_IP+ 'is down!')
+  print( Pro_IP+ ' is down!')
   Pro_IP= input("Confirm the Provider's host: ")
   if os.system("ping -c 1 " + Pro_IP)!=0:
       print("Inputed host is still DOWN");
