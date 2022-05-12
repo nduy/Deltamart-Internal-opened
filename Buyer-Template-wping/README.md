@@ -1,5 +1,5 @@
 MIDNIGHT BUILT version, NOT yet tested with real Pis
-Executable script is "publish.py"<br/>
+Executable script is "subscribe.py"<br/>
 ======= ==API==IMPORTANT: <br/>
 Before running script, you must deploy an API in a server with PHP enabled.\
 See here the following how to install it in Unix-like System:\
