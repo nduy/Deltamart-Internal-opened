@@ -13,3 +13,7 @@ Buyer's client code template in which the Buyer HTTP ping the Provider upon the 
 **Buyer-Template**:
 First Buyer code template + synthetical Collectability Data
 
+**Minimal Prototype**:
+A minimal scenario with an web application via which :
+- Collectability can be declared;
+- Data stream can be published to the MQTT data broker residing at the localhost 
